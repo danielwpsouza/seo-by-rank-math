@@ -33,7 +33,10 @@ class Webpage implements Snippet {
 	public function process( $data, $jsonld ) {
 		$keywords = array();
 
-		/**Verifica se o post tem keywords */
+		/**
+		 * Verifica se o post tem keywords
+		 * @author Daniel Souza <daniel.souza@diletec.com.br>
+		 */
 		if(isset(get_post_meta($jsonld->post_id,"rank_math_focus_keyword")[0])){
 			/**Coloca todas as keywords na variavel $keywords */
             $keywords = explode(",",get_post_meta($jsonld->post_id,"rank_math_focus_keyword")[0]);
