@@ -31,11 +31,19 @@ class Webpage implements Snippet {
 	 * @return array
 	 */
 	public function process( $data, $jsonld ) {
+		$keywords = array();
+
+		/**Verifica se o post tem keywords */
+		if(isset(get_post_meta($jsonld->post_id,"rank_math_focus_keyword")[0])){
+			/**Coloca todas as keywords na variavel $keywords */
+            $keywords = explode(",",get_post_meta($jsonld->post_id,"rank_math_focus_keyword")[0]);
+        }
 		$entity = [
 			'@type' => $this->get_type(),
 			'@id'   => Paper::get()->get_canonical() . '#webpage',
 			'url'   => Paper::get()->get_canonical(),
 			'name'  => Paper::get()->get_title(),
+			'keywords' => $keywords,
 		];
 
 		if ( is_singular() ) {
